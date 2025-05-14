@@ -82,4 +82,11 @@ public class PotionSpawner : MonoBehaviour
             SpawnPotion(data);
         }
     }
+
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(areaCenter, areaSize);
+    }
 }
