@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: RedPotion
+  m_EditorClassIdentifier: Assembly-CSharp::PotionDataSO
+  potionName: Red
+  potency: 20
+  icon: {fileID: 0}
+  description: Red Potion Desctiption
+  prefab: {fileID: 8762149971923713137, guid: feea35a4d41fb854d809f5883b4299ed, type: 3}
