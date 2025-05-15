@@ -3,23 +3,35 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
-    private int totalScore;
+    public int totalScore;
+
 
     void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    private void OnEnable()
     {
-        
+        GameEvents.OnPotionCollected += HandleScore;
+        FirebasePlayerDataController.Instance.OnPlayerDataReady += OnPlayerDataLoaded;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        GameEvents.OnPotionCollected -= HandleScore;
+        FirebasePlayerDataController.Instance.OnPlayerDataReady -= OnPlayerDataLoaded;
+
+    }
+    private void OnPlayerDataLoaded(PlayerData data)
+    {
+        totalScore = data.PlayerScore;
+        GameEvents.ScoreUpdatedEvent(totalScore, 0);
+    }
+    public void HandleScore(string potionType, int potency, float timestamp, GameObject obj)
+    {
+        AddScore(potency);
     }
 
 

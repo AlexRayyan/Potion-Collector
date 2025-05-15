@@ -9,14 +9,6 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 
-[System.Serializable]
-public class ScoreEntry
-{
-    public string playerId;
-    public int score;
-    public string timestamp;
-}
-
 public class FirebaseManager : MonoBehaviour
 {
     public static FirebaseManager Instance;
@@ -106,10 +98,10 @@ public class FirebaseManager : MonoBehaviour
         {
             if (task.IsCompleted)
             {
-                List<ScoreEntry> topScores = new();
+                List<LeaderboardPlayerData> topScores = new();
                 foreach (var item in task.Result.Children)
                 {
-                    ScoreEntry entry = JsonUtility.FromJson<ScoreEntry>(item.GetRawJsonValue());
+                    LeaderboardPlayerData entry = JsonUtility.FromJson<LeaderboardPlayerData>(item.GetRawJsonValue());
                     topScores.Add(entry);
                 }
                 topScores.Reverse();

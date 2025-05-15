@@ -19,6 +19,5 @@ public class Potion : MonoBehaviour
 
         float timestamp = Time.time;
         GameEvents.PotionCollectedEvent(potionData.potionName, potionData.potency, timestamp, this.gameObject);
-        ScoreManager.Instance.AddScore(potionData.potency);
     }
 }

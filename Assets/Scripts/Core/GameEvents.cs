@@ -18,12 +18,11 @@ public static class GameEvents
     public static event Action<int, int> OnScoreUpdated;
 
     // --- Leaderboard Event ---
-    public static event Action<ScoreEntry[]> OnLeaderboardLoaded;
+    public static event Action<LeaderboardPlayerData[]> OnLeaderboardLoaded;
 
     // --- Firebase Sync Events ---
     public static event Action<string> OnFirebaseSyncStarted;
     public static event Action<string, bool> OnFirebaseSyncCompleted;
-
 
 
     public static void GameStartedEvent(float timestamp, string sessionId)
@@ -67,7 +66,7 @@ public static class GameEvents
         OnScoreUpdated?.Invoke(newScore, scoreDelta);
     }
 
-    public static void LeaderboardLoadedEvent(ScoreEntry[] topScores)
+    public static void LeaderboardLoadedEvent(LeaderboardPlayerData[] topScores)
     {
         Debug.Log("LeaderboardLoadedEvent Triggered");
         OnLeaderboardLoaded?.Invoke(topScores);

@@ -11,6 +11,7 @@ public class GoogleSignInManager : MonoBehaviour
     private FirebaseAuth auth;
     private FirebaseUser user;
     public string userId;
+    public string userDisplayName;
     private GoogleSignInConfiguration configuration;
 
     public static GoogleSignInManager Instance;
@@ -76,8 +77,10 @@ public class GoogleSignInManager : MonoBehaviour
                 }
 
                 user = authTask.Result;
-                userId = user.Email; // Store the user's email as userId
+                userId = user.Email;
+                userDisplayName = user.DisplayName;
                 Debug.Log("Signed in as: " + user.DisplayName + " (" + userId + ")");
+                FirebasePlayerDataController.Instance.Init();
                 SceneManager.LoadScene("Gameplay");
             });
         });
@@ -87,8 +90,10 @@ public class GoogleSignInManager : MonoBehaviour
         string fakeDisplayName = "Test User";
         string fakeEmail = "testuser@gmail.com";
         userId = fakeEmail;
+        userDisplayName = fakeDisplayName;
 
         Debug.Log($"Signed in as: {fakeDisplayName} ({userId})");
+        FirebasePlayerDataController.Instance.Init();
 
         OnFakeSignIn(fakeDisplayName, fakeEmail);
 #endif
