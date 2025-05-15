@@ -17,7 +17,7 @@ public class GoogleSignInManager : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
@@ -76,7 +76,8 @@ public class GoogleSignInManager : MonoBehaviour
                 }
 
                 user = authTask.Result;
-                Debug.Log("Signed in as: " + user.DisplayName);
+                userId = user.Email; // Store the user's email as userId
+                Debug.Log("Signed in as: " + user.DisplayName + " (" + userId + ")");
                 SceneManager.LoadScene("Gameplay");
             });
         });
@@ -84,9 +85,10 @@ public class GoogleSignInManager : MonoBehaviour
         Debug.Log("Simulating Google Sign-In (Editor Mode)");
 
         string fakeDisplayName = "Test User";
-        string fakeEmail = "testuser@example.com";
+        string fakeEmail = "testuser@gmail.com";
+        userId = fakeEmail;
 
-        Debug.Log($"Signed in as: {fakeDisplayName} ({fakeEmail})");
+        Debug.Log($"Signed in as: {fakeDisplayName} ({userId})");
 
         OnFakeSignIn(fakeDisplayName, fakeEmail);
 #endif
