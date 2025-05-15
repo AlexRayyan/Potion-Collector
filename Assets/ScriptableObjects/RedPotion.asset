@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 78fefbdee961b7f4b8673e59699a4693, type: 3}
   m_Name: RedPotion
-  m_EditorClassIdentifier: Assembly-CSharp::PotionDataSO
+  m_EditorClassIdentifier: 
   potionName: Red
   potency: 20
-  icon: {fileID: 0}
-  description: Red Potion Desctiption
   prefab: {fileID: 8762149971923713137, guid: feea35a4d41fb854d809f5883b4299ed, type: 3}

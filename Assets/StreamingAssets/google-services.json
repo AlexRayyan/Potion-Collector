@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "961073692999",
+    "firebase_url": "https://potion-collector-default-rtdb.firebaseio.com",
+    "project_id": "potion-collector",
+    "storage_bucket": "potion-collector.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:961073692999:android:f8b3cabedafba3478d0c62",
+        "android_client_info": {
+          "package_name": "com.Rayyan.PotionCollector"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "961073692999-2gkbe495het15trh1l49ti301mded1nf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Rayyan.PotionCollector",
+            "certificate_hash": "87625d81da301da2e1e285c84abc84d6d76aa6c7"
+          }
+        },
+        {
+          "client_id": "961073692999-ob642ln8k0vmb68knpb2iklf9h5lfa0h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZoTZ3cjuoGap7Ku-eTyDKOYKySHd7PCU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "961073692999-ob642ln8k0vmb68knpb2iklf9h5lfa0h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
