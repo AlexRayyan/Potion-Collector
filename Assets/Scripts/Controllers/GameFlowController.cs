@@ -29,7 +29,7 @@ public class GameFlowController : MonoBehaviour
     public void QuitGame()
     {
         float timestamp = Time.time;
-        GameEvents.GameEndedEvent(timestamp, ScoreManager.Instance.totalScore);
+        //GameEvents.GameEndedEvent(timestamp, ScoreManager.Instance.totalScore);
 
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
