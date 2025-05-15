@@ -22,9 +22,10 @@ public class FirebaseGameDataService : IFirebaseGameDataService
         var docRef = db.Collection("Leaderboard").Document(userId);
 
         var data = new Dictionary<string, object>
-        {
-            { "score", score }
-        };
+    {
+        { "UserName", GoogleSignInManager.Instance.userDisplayName },
+        { "Score", score }
+    };
 
         GameEvents.FirebaseSyncStartedEvent("LeaderboardScore");
 
@@ -41,6 +42,7 @@ public class FirebaseGameDataService : IFirebaseGameDataService
             callback?.Invoke(success);
         });
     }
+
 
     public void SavePlayerData(PlayerData playerData, Action<bool> callback)
     {
@@ -60,6 +62,41 @@ public class FirebaseGameDataService : IFirebaseGameDataService
             GameEvents.FirebaseSyncCompletedEvent("PlayerData", success);
             callback?.Invoke(success);
         });
+    }
+    public void LoadLeaderboardData()
+    {
+        GameEvents.FirebaseSyncStartedEvent("LoadLeaderboard");
+
+        db.Collection("Leaderboard")
+          .OrderByDescending("Score")
+          .Limit(5)
+          .GetSnapshotAsync()
+          .ContinueWithOnMainThread(task =>
+          {
+              if (task.IsCompletedSuccessfully)
+              {
+                  List<LeaderboardPlayerData> topScores = new();
+
+                  foreach (var doc in task.Result.Documents)
+                  {
+                      Dictionary<string, object> data = doc.ToDictionary();
+
+                      string userId = data.ContainsKey("UserId") ? data["UserId"].ToString() : "Unknown";
+                      string userName = data.ContainsKey("UserName") ? data["UserName"].ToString() : "Anonymous";
+                      int score = data.ContainsKey("Score") ? Convert.ToInt32(data["Score"]) : 0;
+
+                      topScores.Add(new LeaderboardPlayerData(userId, userName, score));
+                  }
+
+                  GameEvents.LeaderboardLoadedEvent(topScores.ToArray());
+                  GameEvents.FirebaseSyncCompletedEvent("LoadLeaderboard", true);
+              }
+              else
+              {
+                  Debug.LogError("[Firebase] Failed to load leaderboard.");
+                  GameEvents.FirebaseSyncCompletedEvent("LoadLeaderboard", false);
+              }
+          });
     }
 
     public void LoadPlayerData(Action<PlayerData, bool> callback)

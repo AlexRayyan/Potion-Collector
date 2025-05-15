@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System;
+using Firebase.Firestore;
 
 [Serializable]
 public class LeaderboardPlayerData
@@ -16,10 +17,12 @@ public class LeaderboardPlayerData
         Score = score;
     }
 }
+
 public class LeaderboardManager : MonoBehaviour
 {
     [SerializeField] private LeaderboardUiItem leaderboardUiItemPrefab;
     [SerializeField] private Transform itemContainer;
+    [SerializeField] private int topCount = 5;
 
     private ILeaderboardService leaderboardService;
 
@@ -38,7 +41,7 @@ public class LeaderboardManager : MonoBehaviour
         GameEvents.OnLeaderboardLoaded -= UpdateLeaderboardUI;
     }
 
-    public void LoadLeaderboard(int topCount = 10)
+    public void LoadLeaderboard()
     {
         leaderboardService.GetTopPlayers(topCount, null);
     }

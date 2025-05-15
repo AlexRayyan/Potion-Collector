@@ -12,3 +12,4 @@ public class PlayerData
     [FirestoreProperty]
     public Timestamp SessionEnd { get; set; }
 }
+

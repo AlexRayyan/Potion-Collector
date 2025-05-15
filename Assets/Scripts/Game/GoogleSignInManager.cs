@@ -10,8 +10,8 @@ public class GoogleSignInManager : MonoBehaviour
     public string webClientId;
     private FirebaseAuth auth;
     private FirebaseUser user;
-    public string userId;
-    public string userDisplayName;
+    public string userDisplayName = "Test User";
+    public string userId = "testuser@gmail.com";
     private GoogleSignInConfiguration configuration;
 
     public static GoogleSignInManager Instance;
@@ -87,23 +87,20 @@ public class GoogleSignInManager : MonoBehaviour
 #else
         Debug.Log("Simulating Google Sign-In (Editor Mode)");
 
-        string fakeDisplayName = "Test User";
-        string fakeEmail = "testuser@gmail.com";
-        userId = fakeEmail;
-        userDisplayName = fakeDisplayName;
-
-        Debug.Log($"Signed in as: {fakeDisplayName} ({userId})");
+        Debug.Log($"Signed in as: {userDisplayName} ({userId})");
         FirebasePlayerDataController.Instance.Init();
 
-        OnFakeSignIn(fakeDisplayName, fakeEmail);
+        SceneManager.LoadScene("Gameplay");
+
+        //OnFakeSignIn(userDisplayName, userId);
 #endif
     }
 
 #if UNITY_EDITOR
-    private void OnFakeSignIn(string name, string email)
-    {
-        Debug.Log("Fake sign-in successful.");
-        SceneManager.LoadScene("Gameplay");
-    }
+    //private void OnFakeSignIn(string name, string email)
+    //{
+    //    Debug.Log("Fake sign-in successful.");
+    //    SceneManager.LoadScene("Gameplay");
+    //}
 #endif
 }

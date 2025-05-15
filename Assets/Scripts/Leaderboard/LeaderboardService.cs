@@ -15,7 +15,6 @@ public class LeaderboardService : ILeaderboardService
 
     public void GetTopPlayers(int count, Action<List<LeaderboardPlayerData>> callback)
     {
-        // Query Firestore collection "leaderboard", order by "score" descending, limit by count
         Query query = db.Collection("leaderboard")
                         .OrderByDescending("score")
                         .Limit(count);
@@ -25,7 +24,7 @@ public class LeaderboardService : ILeaderboardService
             if (task.IsFaulted || task.IsCanceled)
             {
                 Debug.LogWarning("[LeaderboardService] Failed to fetch leaderboard.");
-                callback?.Invoke(new List<LeaderboardPlayerData>()); // return empty list on failure
+                callback?.Invoke(new List<LeaderboardPlayerData>());
                 return;
             }
 
@@ -36,7 +35,6 @@ public class LeaderboardService : ILeaderboardService
             {
                 if (doc.Exists)
                 {
-                    // Deserialize document data into PlayerData
                     string userId = doc.Id;
                     Dictionary<string, object> data = doc.ToDictionary();
 
@@ -44,7 +42,6 @@ public class LeaderboardService : ILeaderboardService
                     int score = 0;
                     if (data.ContainsKey("score"))
                     {
-                        // Firestore stores numbers as long or double, convert safely
                         if (data["score"] is long longScore)
                             score = (int)longScore;
                         else if (data["score"] is double doubleScore)
@@ -56,7 +53,6 @@ public class LeaderboardService : ILeaderboardService
                 }
             }
 
-            // Return the list of top players
             callback?.Invoke(topPlayers);
         });
     }

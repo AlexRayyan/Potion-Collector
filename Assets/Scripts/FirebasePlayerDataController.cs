@@ -47,6 +47,7 @@ public class FirebasePlayerDataController : MonoBehaviour
         firebaseGameData = new FirebaseGameDataService();
 
         firebaseGameData.LoadPlayerData(OnPlayerDataLoaded);
+        firebaseGameData.LoadLeaderboardData();
     }
 
     private void OnPlayerDataLoaded(PlayerData data, bool success)
